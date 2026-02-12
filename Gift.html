@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Soha ❤️ Hannan</title>
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', cursive;
+    background: linear-gradient(135deg, #ff4e8b, #ff99cc);
+    text-align: center;
+    overflow: hidden;
+    color: white;
+}
+
+header {
+    padding: 20px;
+    font-size: 28px;
+    font-weight: bold;
+    animation: glow 2s infinite alternate;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+    background: rgba(0,0,0,0.3);
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 30px red; }
+}
+
+.container {
+    margin-top: 40px;
+}
+
+img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    border: 5px solid white;
+    box-shadow: 0 0 30px white;
+    animation: float 3s infinite ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+h1 {
+    font-size: 40px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 15px;
+    transition: 0.3s;
+}
+
+#yesBtn { background: #00ff88; color: black; }
+#noBtn { background: red; color: white; position: absolute; }
+
+.message {
+    margin-top: 20px;
+    font-size: 24px;
+    display: none;
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+.heart {
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    animation: fall 5s linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(-100px); }
+    100% { transform: translateY(100vh); }
+}
+
+/* Love letter slide */
+#nextSlide {
+    position: fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    background:#ff6699;
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:10;
+}
+.typing {
+    font-size: 28px;
+    width: 80%;
+    max-width: 600px;
+    white-space: pre-wrap;
+    border-right: 2px solid white;
+    overflow: hidden;
+}
+
+/* Responsive */
+@media(max-width:600px){
+    img{width:150px;height:150px;}
+    h1{font-size:28px;}
+    button{padding:10px 20px;font-size:16px;}
+    .typing{font-size:20px;}
+}
+</style>
+</head>
+<body>
+
+<header>💖 Soha & Hannan 💖</header>
+
+<div class="container">
+    <img src="soha.jpg" alt="Soha">
+    <h1>Soha ❤️ Will You Be Mine Forever?</h1>
+
+    <button id="yesBtn" onclick="yesClick()">YES 💍</button>
+    <button id="noBtn" onmouseover="moveNo()">NO 😢</button>
+
+    <div class="message" id="message"></div>
+</div>
+
+<footer>Made With Infinite Love By Hannan 💘</footer>
+
+<audio id="bgSong" loop>
+    <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Typed love letter slide -->
+<div id="nextSlide">
+    <div class="typing" id="loveLetter"></div>
+</div>
+
+<script>
+const message = document.getElementById("message");
+const noBtn = document.getElementById("noBtn");
+const nextSlide = document.getElementById("nextSlide");
+const loveLetter = document.getElementById("loveLetter");
+const bgSong = document.getElementById("bgSong");
+
+function moveNo() {
+    noBtn.style.top = Math.random() * window.innerHeight + "px";
+    noBtn.style.left = Math.random() * window.innerWidth + "px";
+}
+
+noBtn.onclick = function() {
+    message.style.display = "block";
+    message.innerHTML = "No? 🥺 That would hurt Hannan’s heart forever... 💔<br>You can’t escape true love Soha ❤️";
+}
+
+// Falling hearts
+function createHearts() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = Math.random() * 20 + 10 + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),5000);
+}
+setInterval(createHearts,300);
+
+// Typed love letter content
+const text = `❤️ My Lovely Queen ❤️,
+
+From the moment I saw you, my heart knew it found its home.
+You are my everything, my dream, my forever.
+With every beat, I promise to love you endlessly.
+Together, we create a story more beautiful than any fairy tale.
+You are my love 💕💕💕, and this is our destiny. 💖`;
+let index = 0;
+function typeLoveLetter() {
+    if(index < text.length){
+        loveLetter.innerHTML += text.charAt(index);
+        index++;
+        setTimeout(typeLoveLetter,50);
+    }
+}
+
+// YES click now instantly shows love letter
+function yesClick() {
+    message.style.display = "block";
+    message.innerHTML = "Soha ❤️ You just made Hannan the happiest man alive! 💖✨<br>Our love is legendary, eternal, and written in the stars 🌟";
+    bgSong.play().catch(()=>{});
+    nextSlide.style.display = "flex";
+    typeLoveLetter();
+}
+</script>
+
+</body>
+</html>
